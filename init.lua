@@ -36,15 +36,6 @@ autocmd('LspAttach', {
 }
 )
 
-vim.api.nvim_create_user_command("OpenPdf", function()
-    local filepath = vim.api.nvim_buf_get_name(0)
-    vim.cmd("silent !typst watch " .. filepath .. " &")
-    if filepath:match("%.typ$") then
-        local pdf_path = filepath:gsub("%.typ$", ".pdf")
-        vim.cmd("silent !zathura " .. pdf_path .. " &")
-    end
-end, {})
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
