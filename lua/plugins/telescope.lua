@@ -27,7 +27,7 @@ return {
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
         vim.keymap.set('n', '<leader>ef', function ()
-            builtin.find_files({ cwd = "~/.dotfiles/nvim/.config/nvim" })
+            builtin.find_files({ cwd = "~/personal/dev/env/nvim" })
         end)
         vim.keymap.set('n', '<C-p>', builtin.git_files, {})
         vim.keymap.set('n', '<leader>ps', function()
