@@ -19,73 +19,38 @@ local rep = require("luasnip.extras").rep
 local conds_expand = require("luasnip.extras.conditions.expand")
 
 ls.add_snippets("typst", {
-    s("template", t(
-        [[
-        #import "@preview/rose-pine:0.2.0": apply, rose-pine
-        #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
-        #show: apply()
-
-        #show ref: it => {
-            let eq = math.equation
-            let el = it.element
-            if el != none and el.func() == eq {
-                // Override equation references.
-                link(el.location(),numbering(
-                    el.numbering,
-                    ..counter(eq).at(el.location())
-                ))
-            } else {
-                // Other references as usual.
-                it
-            }
-        }
-
-        #let num_eq(content) = math.equation(
-            block: true,
-            numbering: "(1)",
-            content,
-        )
-
-        #let theorem(num, contents) = [
-        #block(
-            stroke: rose-pine.rose,
-            inset: 1em,
-            width: 100%,
-            fill: gradient.linear(rose-pine.pine, rose-pine.love, angle: 30deg)
-        )[
-        *Теорема #num.* #contents
-        ]
-        ]
-
-        #let definition(contents) = [
-        #block(
-            stroke: rose-pine.rose,
-            inset: 1em,
-            width: 100%,
-            fill: gradient.linear(rose-pine.pine, rose-pine.love, angle: 30deg)
-        )[
-        *Определение.* #contents
-        ]
-        ]
-
-        #let qedsymbol = [
-        #align(right)[
-        #square(size: 0.6em, stroke: 0.5pt + rose-pine.base, fill: rose-pine.text)
-        ]
-        ]
-        ]])
-    ),
     s("mk", fmt("${}$ {}", { i(1), i(0) })),
     s("dm", fmt(
         [[
         $
-        {}
+          {}
         $
-        {}
         ]],
-        { i(1), i(0) })
+        { i(0) })
     ),
     s("cc", t("subset")),
+    s({ trig="sr", wordTrig=false }, t("^2")),
+    s({ trig="cb", wordTrig=false }, t("^3")),
+    s({ trig="inv", wordTrig=false }, t("^(-1)")),
+    s({ trig="td", wordTrig=false }, fmta("^(<>)<>", { i(1), i(0) })),
+    s({ trig='(%a)(%d)', regTrig=true, name='auto subscript', dscr='auto subscript'},
+        fmt([[<>_<>]],
+        { f(function(_, snip) return snip.captures[1] end),
+        f(function(_, snip) return snip.captures[2] end) },
+        { delimiters='<>' })
+    ),
+    s({ trig='(%a)_(%d%d)', regTrig=true, name='auto subscript 2', dscr='auto subscript for 2+ digits'},
+        fmt([[<>_(<>)]],
+        { f(function(_, snip) return snip.captures[1] end),
+        f(function(_, snip) return snip.captures[2] end)},
+        { delimiters='<>' })
+    ),
+
+    postfix("tilde", { l("tilde(" .. l.POSTFIX_MATCH .. ")") }),
+    postfix("hat", { l("hat(" .. l.POSTFIX_MATCH .. ")") }),
+    postfix("bar", { l("macron(" .. l.POSTFIX_MATCH .. ")") }),
+    postfix("vec", { l("arrow(" .. l.POSTFIX_MATCH .. ")") }),
+
 }, {
     type = "autosnippets",
 })
