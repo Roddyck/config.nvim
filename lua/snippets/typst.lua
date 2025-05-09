@@ -38,34 +38,29 @@ ls.add_snippets("typst", {
   s({ trig = "td", wordTrig = false }, fmta("^(<>)<>", { i(1), i(0) })),
   s(
     { trig = "(%a)(%d)", regTrig = true, name = "auto subscript", dscr = "auto subscript" },
-    fmt(
-      [[<>_<>]],
-      {
-        f(function(_, snip)
-          return snip.captures[1]
-        end),
-        f(function(_, snip)
-          return snip.captures[2]
-        end),
-      },
-      { delimiters = "<>" }
-    )
+    fmt([[<>_<>]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+    }, { delimiters = "<>" })
   ),
   s(
     { trig = "(%a)_(%d%d)", regTrig = true, name = "auto subscript 2", dscr = "auto subscript for 2+ digits" },
-    fmt(
-      [[<>_(<>)]],
-      {
-        f(function(_, snip)
-          return snip.captures[1]
-        end),
-        f(function(_, snip)
-          return snip.captures[2]
-        end),
-      },
-      { delimiters = "<>" }
-    )
+    fmt([[<>_(<>)]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+    }, { delimiters = "<>" })
   ),
+  s({ trig = "__", wordTrig = false }, fmta("_(<>)<>", { i(1), i(0) })),
+  s("pm", t("plus.minus")),
+
 
   postfix("tilde", { l("tilde(" .. l.POSTFIX_MATCH .. ")") }),
   postfix("hat", { l("hat(" .. l.POSTFIX_MATCH .. ")") }),
