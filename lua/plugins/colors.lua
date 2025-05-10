@@ -128,7 +128,7 @@ return {
         },
       })
 
-      vim.cmd.colorscheme "rose-pine"
+      --vim.cmd.colorscheme "rose-pine"
     end,
   },
 
@@ -158,7 +158,7 @@ return {
         dim_inactive = false,
         transparent_mode = true,
       })
-      --vim.cmd("colorscheme gruvbox")
+      vim.cmd("colorscheme gruvbox")
     end,
   },
 }
