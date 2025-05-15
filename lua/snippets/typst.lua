@@ -60,6 +60,7 @@ ls.add_snippets("typst", {
   ),
   s({ trig = "__", wordTrig = false }, fmta("_(<>)<>", { i(1), i(0) })),
   s("pm", t("plus.minus")),
+  s("norm", fmta("||<>||<>", { i(1), i(0) })),
 
 
   postfix("tilde", { l("tilde(" .. l.POSTFIX_MATCH .. ")") }),
