@@ -43,7 +43,7 @@ return {
       capabilities = capabilities,
       settings = {
         formatterMode = "typstyle",
-        exportPdf = "onType",
+        exportPdf = "onSave",
       },
     })
 
