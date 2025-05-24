@@ -6,24 +6,37 @@ return {
     "williamboman/mason-lspconfig.nvim",
 
     -- Autocompletion
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lua",
-    "saadparwaiz1/cmp_luasnip",
+    {
+      "saghen/blink.cmp",
+      version = "1.*",
+    },
 
     -- Snippets
     "L3MON4D3/LuaSnip",
-
-    "j-hui/fidget.nvim",
   },
   config = function()
-    local cmp = require("cmp")
-    local cmp_lsp = require("cmp_nvim_lsp")
+    local blink = require("blink.cmp")
     local capabilities =
-      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), blink.get_lsp_capabilities())
+
+    require("mason").setup({})
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "vtsls",
+        "basedpyright",
+        "clangd",
+        "lua_ls",
+        "gopls",
+        "rust_analyzer",
+      },
+    })
+
+    local servers = require("mason-lspconfig").get_installed_servers()
+    for _, server in ipairs(servers) do
+      vim.lsp.config(server, {
+        capabilities = capabilities,
+      })
+    end
 
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
@@ -34,6 +47,18 @@ return {
           },
           diagnostics = {
             globals = { "vim", "it", "describe", "before_each", "after_each" },
+          },
+          -- Make the server aware of Neovim runtime files
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              vim.env.VIMRUNTIME,
+              -- Depending on the usage, you might want to add additional paths here.
+              -- "${3rd}/luv/library"
+              -- "${3rd}/busted/library",
+            },
+            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+            -- library = vim.api.nvim_get_runtime_file("", true)
           },
         },
       },
@@ -47,41 +72,22 @@ return {
       },
     })
 
-    require("fidget").setup({})
-    require("mason").setup({})
-    require("mason-lspconfig").setup({
-      ensure_installed = {
-        "vtsls",
-        "basedpyright",
-        "clangd",
-        "lua_ls",
-        "gopls",
-        "rust_analyzer",
-      },
-    })
+    blink.setup({
+      keymap = { preset = "default" },
 
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-        end,
+      appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = "mono",
       },
-      mapping = cmp.mapping.preset.insert({
-        ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-        ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-      }),
-      sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "path" },
-        { name = "nvim_lua" },
-        { name = "luasnip" }, -- For luasnip users.
-      }, {
-        { name = "buffer" },
-      }),
+
+      -- Show documentation when selecting a completion item
+      documentation = { auto_show = true, auto_show_delay_ms = 500 },
+
+      snippets = { preset = "luasnip" },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
     })
 
     vim.diagnostic.config({
@@ -90,7 +96,7 @@ return {
         focusable = false,
         style = "minimal",
         border = "rounded",
-        source = "always",
+        source = true,
         header = "",
         prefix = "",
       },
