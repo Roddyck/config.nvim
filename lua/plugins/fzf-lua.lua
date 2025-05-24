@@ -8,12 +8,19 @@ return {
     config = function()
       local fzf_lua = require("fzf-lua")
       fzf_lua.setup({
-        "telescope",
+        "default-title",
 
         fzf_colors = {
           true,
           bg = "-1",
           gutter = "-1",
+        },
+
+        keymap = {
+          fzf = {
+            true,
+            ["ctrl-q"] = "select-all+accept",
+          },
         },
       })
 
