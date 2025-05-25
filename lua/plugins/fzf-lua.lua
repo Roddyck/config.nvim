@@ -6,14 +6,18 @@ return {
     -- or if using mini.icons/mini.nvim
     -- dependencies = { "echasnovski/mini.icons" },
     config = function()
-      local fzf_lua = require("fzf-lua")
-      fzf_lua.setup({
+      local fzf = require("fzf-lua")
+      fzf.setup({
         "default-title",
 
-        fzf_colors = {
-          true,
-          bg = "-1",
-          gutter = "-1",
+        fzf_colors = true,
+
+        fzf_opts = {
+          ["--no-scrollbar"] = true,
+        },
+
+        winopts = {
+          title_flags = false,
         },
 
         keymap = {
@@ -24,14 +28,14 @@ return {
         },
       })
 
-      vim.keymap.set("n", "<leader>pf", fzf_lua.files)
+      vim.keymap.set("n", "<leader>pf", fzf.files)
       vim.keymap.set("n", "<leader>ef", function()
-        fzf_lua.files({ cwd = "~/personal/dev/env/.config/nvim" })
+        fzf.files({ cwd = "~/personal/dev/env/.config/nvim" })
       end)
-      vim.keymap.set("n", "<C-p>", fzf_lua.git_files)
-      vim.keymap.set("n", "<leader>ps", fzf_lua.grep)
-      vim.keymap.set("n", "<leader>lg", fzf_lua.live_grep)
-      vim.keymap.set("n", "<leader>vh", fzf_lua.helptags)
+      vim.keymap.set("n", "<C-p>", fzf.git_files)
+      vim.keymap.set("n", "<leader>ps", fzf.grep)
+      vim.keymap.set("n", "<leader>lg", fzf.live_grep)
+      vim.keymap.set("n", "<leader>vh", fzf.helptags)
     end,
   },
 }
