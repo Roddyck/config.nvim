@@ -1,5 +1,5 @@
 vim.opt.shiftwidth = 2
-vim.opt.spelllang = "en_us"
+vim.opt.spelllang = "en_us,ru"
 vim.opt.spell = true
 vim.keymap.set("i", "<C-l>", "<c-g>u<ESC>[s1z=`a]<c-g>u", { buffer = 0, noremap = true })
 
