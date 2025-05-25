@@ -31,12 +31,9 @@ return {
       },
     })
 
-    local servers = require("mason-lspconfig").get_installed_servers()
-    for _, server in ipairs(servers) do
-      vim.lsp.config(server, {
-        capabilities = capabilities,
-      })
-    end
+    vim.lsp.config("*", {
+      capabilities = capabilities
+    })
 
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
