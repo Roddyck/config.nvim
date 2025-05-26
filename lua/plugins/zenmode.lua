@@ -1,31 +1,39 @@
 return {
-  "folke/zen-mode.nvim",
-  config = function()
-    vim.keymap.set("n", "<leader>zz", function()
-      require("zen-mode").setup {
-        window = {
-          width = 90,
-          options = {},
-        },
-      }
-      require("zen-mode").toggle()
-      vim.wo.wrap = false
-      vim.wo.number = true
-      vim.wo.rnu = true
-    end)
+  {
+    "folke/zen-mode.nvim",
+    config = function()
+      vim.keymap.set("n", "<leader>zz", function()
+        require("zen-mode").setup {
+          window = {
+            backdrop = 1,
+            height = 0.9,
+            width = 0.8,
+            options = {
+              number = false,
+              relativenumber = false,
+              signcolumn = "no",
+              list = false,
+              cursorline = false,
+            },
+          },
+          require("zen-mode").toggle(),
+        }
 
-    vim.keymap.set("n", "<leader>zZ", function()
-      require("zen-mode").setup {
-        window = {
-          width = 80,
-          options = {},
-        },
+        require("twilight").setup {
+          context = 10,
+          treesitter = true,
+        }
+      end)
+    end,
+  },
+
+  {
+    "folke/twilight.nvim",
+    config = function()
+      require("twilight").setup {
+        context = -1,
+        treesitter = true,
       }
-      require("zen-mode").toggle()
-      vim.wo.wrap = false
-      vim.wo.number = false
-      vim.wo.rnu = false
-      vim.opt.colorcolumn = "0"
-    end)
-  end,
+    end,
+  },
 }
