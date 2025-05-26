@@ -6,6 +6,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "black" },
+        go = { "gofmt" },
       },
 
       default_format_opts = {
