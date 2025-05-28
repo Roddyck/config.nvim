@@ -8,7 +8,7 @@ return {
     config = function()
       local fzf = require("fzf-lua")
       fzf.setup({
-        "default-title",
+        "ivy",
 
         fzf_colors = true,
 
@@ -17,6 +17,7 @@ return {
         },
 
         winopts = {
+          height = 0.5,
           title_flags = false,
         },
 
