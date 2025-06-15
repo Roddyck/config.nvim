@@ -47,10 +47,10 @@ autocmd("LspAttach", {
       vim.lsp.buf.signature_help()
     end, opts)
     vim.keymap.set("n", "[d", function()
-      vim.diagnostic.jump({ count = 1, float = true})
+      vim.diagnostic.jump({ count = 1, float = true })
     end, opts)
     vim.keymap.set("n", "]d", function()
-      vim.diagnostic.jump({ count = -1, float = true})
+      vim.diagnostic.jump({ count = -1, float = true })
     end, opts)
   end,
 })
@@ -75,6 +75,4 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-
-  checker = { enabled = true },
 })
