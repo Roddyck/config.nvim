@@ -6,11 +6,11 @@ return {
 
     "ibhagwan/fzf-lua", -- optional
   },
-  config = function()
-    require("neogit").setup({
-      kind = "split_above",
-    })
+  keys = {
+    { "<leader>gs", "<cmd>Neogit<cr>", desc = "Neogit" },
 
-    vim.keymap.set("n", "<leader>gs", vim.cmd.Neogit)
-  end,
+  },
+  opts = {
+    kind = "split_above",
+  },
 }

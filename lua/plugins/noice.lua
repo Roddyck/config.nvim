@@ -10,13 +10,24 @@ return {
     "rcarriga/nvim-notify",
     "nvim-lualine/lualine.nvim",
   },
-
-  config = function()
+  opts = function()
     require("notify").setup({
       background_colour = "#000000",
     })
 
-    require("noice").setup({
+    require("lualine").setup({
+      sections = {
+        lualine_x = {
+          {
+            require("noice").api.statusline.mode.get,
+            cond = require("noice").api.statusline.mode.has,
+            color = { fg = "#ff9e64" },
+          },
+        },
+      },
+    })
+
+    return {
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
@@ -25,17 +36,6 @@ return {
         },
       },
 
-      require("lualine").setup({
-        sections = {
-          lualine_x = {
-            {
-              require("noice").api.statusline.mode.get,
-              cond = require("noice").api.statusline.mode.has,
-              color = { fg = "#ff9e64" },
-            },
-          },
-        },
-      }),
       -- you can enable a preset for easier configuration
       presets = {
         bottom_search = false, -- use a classic bottom cmdline for search
@@ -44,6 +44,6 @@ return {
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false, -- add a border to hover docs and signature help
       },
-    })
+    }
   end,
 }
