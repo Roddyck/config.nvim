@@ -23,7 +23,7 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         "vtsls",
-        "basedpyright",
+        "pyright",
         "clangd",
         "lua_ls",
         "gopls",
