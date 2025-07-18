@@ -7,6 +7,14 @@ local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 local RdkGroup = augroup("Rdk", {})
 
+autocmd("FileType", {
+  pattern = { "<filetype>" },
+  callback = function()
+    vim.treesitter.start()
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
 autocmd("TextYankPost", {
   group = yank_group,
   pattern = "*",
