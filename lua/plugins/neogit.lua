@@ -8,9 +8,5 @@ return {
   },
   keys = {
     { "<leader>gs", "<cmd>Neogit<cr>", desc = "Neogit" },
-
-  },
-  opts = {
-    kind = "split_above",
   },
 }
