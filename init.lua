@@ -7,11 +7,37 @@ local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 local RdkGroup = augroup("Rdk", {})
 
+local function ts_start(bufnr, lang)
+  vim.treesitter.start(bufnr, lang)
+  vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end
+
 autocmd("FileType", {
-  pattern = { "<filetype>" },
-  callback = function()
-    vim.treesitter.start()
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  callback = function(args)
+    local ts_config = require("nvim-treesitter.config")
+
+    local bufnr = args.buf
+    local ft = vim.bo[args.buf].filetype
+
+    if ft == "" then
+      return
+    end
+
+    local lang = vim.treesitter.language.get_lang(ft)
+
+    if not vim.tbl_contains(ts_config.get_available(), lang) then
+      return
+    end
+
+    if not vim.tbl_contains(ts_config.get_installed("parsers"), lang) then
+      vim.notify("Installing parser for " .. lang, vim.log.levels.INFO)
+      require("nvim-treesitter").install({ lang }):await(function()
+        ts_start(bufnr, lang)
+      end)
+      return
+    end
+
+    ts_start(bufnr, lang)
   end,
 })
 
