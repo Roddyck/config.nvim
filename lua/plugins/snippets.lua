@@ -18,8 +18,6 @@ return {
 
       require("luasnip.loaders.from_vscode").lazy_load()
 
-      -- vim.keymap.set({"i"}, "<C-s>e", function() ls.expand() end, {silent = true})
-
       for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/snippets/*.lua", true)) do
         loadfile(ft_path)()
       end
@@ -29,8 +27,6 @@ return {
           ls.expand_or_jump()
         end
       end, { silent = true })
-
-      -- vim.keymap.set({"i", "s"}, "<C-s>;", function() ls.jump(1) end, {silent = true})
 
       vim.keymap.set({ "i", "s" }, "<C-j>", function()
         if ls.jumpable(-1) then
