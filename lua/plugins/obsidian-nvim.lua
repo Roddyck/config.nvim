@@ -7,8 +7,8 @@ return {
     -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
     -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
     -- refer to `:h file-pattern` for more examples
-    "BufReadPre " .. vim.fn.expand "~" .. "personal/notties/*.md",
-    "BufNewFile " .. vim.fn.expand "~" .. "personal/notties/*.md",
+    "BufReadPre " .. vim.fn.expand "~" .. "/personal/notties/*.md",
+    "BufNewFile " .. vim.fn.expand "~" .. "/personal/notties/*.md",
   },
   ---@module 'obsidian'
   ---@type obsidian.config
