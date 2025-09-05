@@ -7,7 +7,9 @@ return {
     -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
     -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
     -- refer to `:h file-pattern` for more examples
-    "BufReadPre " .. vim.fn.expand "~" .. "/personal/notties/*.md",
+    "BufReadPre "
+      .. vim.fn.expand "~"
+      .. "/personal/notties/*.md",
     "BufNewFile " .. vim.fn.expand "~" .. "/personal/notties/*.md",
   },
   ---@module 'obsidian'
@@ -24,6 +26,21 @@ return {
         name = "notties",
         path = "~/personal/notties",
       },
+    },
+
+    daily_notes = {
+      -- Optional, if you keep daily notes in a separate directory.
+      folder = "notes/dailies",
+      -- Optional, if you want to change the date format for the ID of daily notes.
+      date_format = "%Y-%m-%d",
+      -- Optional, if you want to change the date format of the default alias of daily notes.
+      alias_format = "%B %-d, %Y",
+      -- Optional, default tags to add to each new daily note created.
+      default_tags = { "daily-notes" },
+      -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+      template = nil,
+      -- Optional, if you want `Obsidian yesterday` to return the last work day or `Obsidian tomorrow` to return the next work day.
+      workdays_only = true,
     },
 
     legacy_commands = false,

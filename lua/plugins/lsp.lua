@@ -31,6 +31,8 @@ return {
       },
     })
 
+    vim.lsp.enable("racket_langserver")
+
     vim.lsp.config("*", {
       capabilities = capabilities,
     })
