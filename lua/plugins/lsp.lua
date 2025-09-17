@@ -43,7 +43,7 @@ return {
           local path = client.workspace_folders[1].name
           if
             path ~= vim.fn.stdpath("config")
-            and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+            and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc")) ---@diagnostic disable-line: undefined-field
           then
             return
           end

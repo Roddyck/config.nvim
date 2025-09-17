@@ -65,7 +65,7 @@ ls.add_snippets("typst", {
 
   postfix("tilde", { l("tilde(" .. l.POSTFIX_MATCH .. ")") }),
   postfix("hat", { l("hat(" .. l.POSTFIX_MATCH .. ")") }),
-  postfix("bar", { l("macron(" .. l.POSTFIX_MATCH .. ")") }),
+  postfix("bar", { l("overline(" .. l.POSTFIX_MATCH .. ")") }),
   postfix("vec", { l("arrow(" .. l.POSTFIX_MATCH .. ")") }),
 }, {
   type = "autosnippets",

@@ -7,37 +7,15 @@ local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 local RdkGroup = augroup("Rdk", {})
 
-local function ts_start(bufnr, lang)
-  vim.treesitter.start(bufnr, lang)
-  vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-end
-
 autocmd("FileType", {
   callback = function(args)
-    local ts_config = require("nvim-treesitter.config")
-
     local bufnr = args.buf
-    local ft = vim.bo[args.buf].filetype
-
-    if ft == "" then
+    local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+    if not ok or not parser then
       return
     end
-
-    local lang = vim.treesitter.language.get_lang(ft)
-
-    if not vim.tbl_contains(ts_config.get_available(), lang) then
-      return
-    end
-
-    if not vim.tbl_contains(ts_config.get_installed("parsers"), lang) then
-      vim.notify("Installing parser for " .. lang, vim.log.levels.INFO)
-      require("nvim-treesitter").install({ lang }):await(function()
-        ts_start(bufnr, lang)
-      end)
-      return
-    end
-
-    ts_start(bufnr, lang)
+    pcall(vim.treesitter.start)
+    vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 
@@ -90,6 +68,8 @@ autocmd("LspAttach", {
 })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
