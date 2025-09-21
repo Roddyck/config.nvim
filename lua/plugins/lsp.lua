@@ -98,7 +98,12 @@ return {
     })
 
     blink.setup({
-      keymap = { preset = "default" },
+      keymap = {
+        preset = "default",
+
+        ["<Tab>"] = false,
+        ["<S-Tab>"] = false,
+      },
 
       appearance = {
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -107,6 +112,13 @@ return {
       },
 
       completion = {
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = false,
+          },
+        },
+
         -- Show documentation when selecting a completion item
         documentation = {
           auto_show = true,
