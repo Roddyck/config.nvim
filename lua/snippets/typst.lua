@@ -62,7 +62,6 @@ ls.add_snippets("typst", {
   s("pm", t("plus.minus")),
   s("norm", fmta("||<>||<>", { i(1), i(0) })),
 
-
   postfix("tilde", { l("tilde(" .. l.POSTFIX_MATCH .. ")") }),
   postfix("hat", { l("hat(" .. l.POSTFIX_MATCH .. ")") }),
   postfix("bar", { l("overline(" .. l.POSTFIX_MATCH .. ")") }),
