@@ -19,7 +19,20 @@ local rep = require("luasnip.extras").rep
 local conds_expand = require("luasnip.extras.conditions.expand")
 
 ls.add_snippets("typst", {
-  s("mk", fmt("${}$ {}", { i(1), i(0) })),
+  s(
+    "template",
+    fmt(
+      [[
+#import "template-lec.typ": conf
+#show: doc => conf([{}], doc)
+{}
+      ]],
+      { i(1), i(0) }
+    ),
+    { condition = conds_expand.line_begin }
+  ),
+
+  s("mt", fmt("${}$ {}", { i(1), i(0) })),
   s(
     "dm",
     fmt(
@@ -68,4 +81,8 @@ ls.add_snippets("typst", {
   postfix("vec", { l("arrow(" .. l.POSTFIX_MATCH .. ")") }),
 }, {
   type = "autosnippets",
+})
+
+ls.add_snippets("typst", {
+  s("today", t(os.date("%d.%m.%Y"))),
 })
