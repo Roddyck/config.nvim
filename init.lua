@@ -15,7 +15,6 @@ autocmd("FileType", {
       return
     end
     pcall(vim.treesitter.start)
-    vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 
