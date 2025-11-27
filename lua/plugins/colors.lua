@@ -131,7 +131,7 @@ return {
     config = function(_, opts)
       require("rose-pine").setup(opts)
 
-      vim.cmd.colorscheme "rose-pine"
+      -- vim.cmd.colorscheme "rose-pine"
     end,
   },
 
@@ -162,7 +162,7 @@ return {
     },
     config = function(_, opts)
       require("gruvbox").setup(opts)
-      -- vim.cmd("colorscheme gruvbox")
+      vim.cmd("colorscheme gruvbox")
     end,
   },
 }
