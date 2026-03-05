@@ -7,5 +7,6 @@ return {
     vim.keymap.set("n", "<leader>cq", "<cmd>RocqStop<cr>")
     vim.keymap.set("n", "<leader>cj", "<cmd>RocqNext<cr>")
     vim.keymap.set("n", "<leader>ck", "<cmd>RocqUndo<cr>")
+    vim.keymap.set("n", "<leader>cl", "<cmd>RocqToLine<cr>")
   end,
 }
