@@ -5,6 +5,9 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- or if using mini.icons/mini.nvim
     -- dependencies = { "echasnovski/mini.icons" },
+    ---@module "fzf-lua"
+    ---@type fzf-lua.Config|{}
+    ---@diagnostic disable: missing-fields
     opts = {
       "ivy",
 
@@ -15,7 +18,6 @@ return {
       },
 
       winopts = {
-        height = 0.5,
         title_flags = false,
       },
 
