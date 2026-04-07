@@ -1,28 +1,32 @@
-return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    branch = "main",
-    build = ":TSUpdate",
-    config = function()
-      local ensure_installed = {
-        "vimdoc",
-        "jsdoc",
-        "python",
-        "javascript",
-        "typescript",
-        "c",
-        "lua",
-        "rust",
-        "bash",
-      }
-      require("nvim-treesitter").install(ensure_installed)
-    end,
-  },
+vim.api.nvim_create_autocmd('PackChanged', { callback = function(event)
+  local name, kind = event.data.spec.name, event.data.kind
+  if name == 'nvim-treesitter' and kind == 'update' then
+    if not event.data.active then vim.cmd.packadd('nvim-treesitter') end
+    vim.cmd('TSUpdate')
+  end
+end })
 
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    opts = {
+vim.pack.add({
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" } 
+})
+
+local ensure_installed = {
+  "vimdoc",
+  "jsdoc",
+  "python",
+  "javascript",
+  "typescript",
+  "c",
+  "lua",
+  "rust",
+  "bash",
+}
+require("nvim-treesitter").install(ensure_installed)
+
+vim.pack.add({
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" } 
+})
+require("treesitter-context").setup({
       enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
       multiwindow = false, -- Enable multiwindow support.
       max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
@@ -36,6 +40,4 @@ return {
       separator = nil,
       zindex = 20, -- The Z-index of the context window
       on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-    },
-  },
-}
+})
