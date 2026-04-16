@@ -1,12 +1,9 @@
 vim.pack.add({
-  { src = "https://github.com/ibhagwan/fzf-lua" }, 
+  { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
 })
 
 local fzf = require("fzf-lua")
----@module "fzf-lua"
----@type fzf-lua.Config|{}
----@diagnostic disable: missing-fields
 fzf.setup({
   "ivy",
 

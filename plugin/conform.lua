@@ -6,9 +6,6 @@ vim.keymap.set("n", "<leader>f", function()
   require("conform").format({ bufnr = 0 })
 end)
 
--- This will provide type hinting with LuaLS
----@module "conform"
----@type conform.setupOpts
 require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
