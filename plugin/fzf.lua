@@ -23,6 +23,10 @@ fzf.setup({
       ["ctrl-q"] = "select-all+accept",
     },
   },
+
+  files = {
+    no_ignore = true, -- don't respect .gitignore, I use git_files for that instead
+  },
 })
 
 vim.keymap.set("n", "<leader>pf", fzf.files)
