@@ -51,6 +51,10 @@
       "rev": "8811f3f3f4dc09d740c67e9ce399e7a541e2e5b2",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
+    "mini.nvim": {
+      "rev": "418ef4930ddabe80f449c6f1323f8b6abb172d1c",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
     "neogit": {
       "rev": "5432fe2b2565bb10d868c759245cd4c64125da31",
       "src": "https://github.com/NeogitOrg/neogit"

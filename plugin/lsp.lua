@@ -100,6 +100,7 @@ local servers = {
   --     end, { desc = "Migrate Component to Svelte 5 Syntax" })
   --   end,
   -- },
+  clangd = {},
 }
 
 require("fidget").setup()

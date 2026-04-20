@@ -24,6 +24,7 @@ local ensure_installed = {
   "lua",
   "rust",
   "bash",
+  "gitcommit",
 }
 
 require("nvim-treesitter").install(ensure_installed)
