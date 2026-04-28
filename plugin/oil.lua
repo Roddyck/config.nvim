@@ -3,7 +3,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
 })
 
-require('oil').setup({
+require("oil").setup({
   keymaps = {
     ["<C-s>"] = false,
     ["<C-h>"] = false,
@@ -14,3 +14,5 @@ require('oil').setup({
     show_hidden = true,
   },
 })
+
+vim.keymap.set("n", "<leader>pv", vim.cmd.Oil)

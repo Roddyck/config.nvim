@@ -29,7 +29,7 @@ local ensure_installed = {
 
 require("nvim-treesitter").install(ensure_installed)
 
-local group = vim.api.nvim_create_augroup("RoddykTreesitter", { clear = true })
+local group = vim.api.nvim_create_augroup("custom_treesitter", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
   group = group,
   callback = function(args)

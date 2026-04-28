@@ -66,6 +66,7 @@ local servers = {
   svelte = {},
   clangd = {},
   vtsls = {},
+  gopls = {},
 }
 
 require("fidget").setup()
@@ -98,7 +99,7 @@ vim.diagnostic.config({
   },
 })
 
-local group = vim.api.nvim_create_augroup("RoddykLsp", {})
+local group = vim.api.nvim_create_augroup("custom-lsp", {})
 vim.api.nvim_create_autocmd("LspAttach", {
   group = group,
   callback = function(e)
