@@ -1,32 +1,24 @@
 vim.pack.add({
   { src = "https://github.com/neovim/nvim-lspconfig" },
 
+  { src = "https://github.com/j-hui/fidget.nvim" },
+
   -- Autocompletion
   {
     src = "https://github.com/saghen/blink.cmp",
     version = vim.version.range("1.*"),
   },
 
-  {
-    src = "https://github.com/j-hui/fidget.nvim",
-  },
+  -- typescript...
+  { src = "https://github.com/pmizio/typescript-tools.nvim" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
 })
 
 -- servers with additional configuration, empty table if no config
 local servers = {
   lua_ls = {
-    on_init = function(client)
-      if client.workspace_folders then
-        local path = client.workspace_folders[1].name
-        if
-          path ~= vim.fn.stdpath("config")
-          and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc")) ---@diagnostic disable-line: undefined-field
-        then
-          return
-        end
-      end
-
-      client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+    settings = {
+      Lua = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most
           -- likely LuaJIT in the case of Neovim)
@@ -43,14 +35,12 @@ local servers = {
           checkThirdParty = false,
           library = {
             vim.env.VIMRUNTIME,
+            vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
           },
         },
-      })
-    end,
-    settings = {
-      Lua = {
+
         diagnostics = {
-          globals = { "vim", "it", "describe", "before_each", "after_each" },
+          globals = { "vim" },
         },
       },
     },
@@ -65,8 +55,8 @@ local servers = {
 
   svelte = {},
   clangd = {},
-  vtsls = {},
   gopls = {},
+  tailwindcss = {},
 }
 
 require("fidget").setup()
@@ -98,6 +88,36 @@ vim.diagnostic.config({
     prefix = "",
   },
 })
+
+require("typescript-tools").setup {
+  settings = {
+    -- spawn additional tsserver instance to calculate diagnostics on it
+    separate_diagnostic_server = true,
+    -- "change"|"insert_leave" determine when the client asks the server about diagnostic
+    publish_diagnostic_on = "insert_leave",
+    -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
+    complete_function_calls = true,
+    include_completions_with_insert_text = true,
+    code_lens = "off",
+    disable_member_code_lens = true,
+    jsx_close_tag = {
+      enable = false,
+      filetypes = { "javascriptreact", "typescriptreact" },
+    },
+    tsserver_file_preferences = {
+      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      includeInlayVariableTypeHints = true,
+      includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeCompletionsForModuleExports = true,
+      includeCompletionsForImportStatements = true,
+    },
+  },
+}
 
 local group = vim.api.nvim_create_augroup("custom-lsp", {})
 vim.api.nvim_create_autocmd("LspAttach", {

@@ -109,7 +109,7 @@ ls.add_snippets("tex", {
     { condition = conds_expand.line_begin }
   ),
 
-  s("mk", fmt("$ {} $ {}", { i(1), i(0) })),
+  s("mt", fmt("$ {} $ {}", { i(1), i(0) })),
   s(
     "dm",
     fmt(
@@ -248,34 +248,26 @@ ls.add_snippets("tex", {
 
   s(
     { trig = "(%a)(%d)", regTrig = true, name = "auto subscript", dscr = "auto subscript" },
-    fmt(
-      [[<>_<>]],
-      {
-        f(function(_, snip)
-          return snip.captures[1]
-        end),
-        f(function(_, snip)
-          return snip.captures[2]
-        end),
-      },
-      { delimiters = "<>" }
-    ),
+    fmt([[<>_<>]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+    }, { delimiters = "<>" }),
     { condition = math }
   ),
   s(
     { trig = "(%a)_(%d%d)", regTrig = true, name = "auto subscript 2", dscr = "auto subscript for 2+ digits" },
-    fmt(
-      [[<>_{<>}]],
-      {
-        f(function(_, snip)
-          return snip.captures[1]
-        end),
-        f(function(_, snip)
-          return snip.captures[2]
-        end),
-      },
-      { delimiters = "<>" }
-    ),
+    fmt([[<>_{<>}]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+    }, { delimiters = "<>" }),
     { condition = math }
   ),
 

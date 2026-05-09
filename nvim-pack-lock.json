@@ -108,6 +108,10 @@
       "rev": "664e752f4a219801265cc3fc18782b457b58c1e1",
       "src": "https://github.com/folke/twilight.nvim"
     },
+    "typescript-tools.nvim": {
+      "rev": "c2f5910074103705661e9651aa841e0d7eea9932",
+      "src": "https://github.com/pmizio/typescript-tools.nvim"
+    },
     "typst-preview.nvim": {
       "rev": "325036ee145ca51d9efb145c09ac16bce3bc8b7d",
       "src": "https://github.com/chomosuke/typst-preview.nvim",
