@@ -9,42 +9,25 @@ vim.pack.add({
     version = vim.version.range("1.*"),
   },
 
+  -- setup lua_ls for lazy people
+  { src = "https://github.com/folke/lazydev.nvim" },
+
   -- typescript...
   { src = "https://github.com/pmizio/typescript-tools.nvim" },
   { src = "https://github.com/nvim-lua/plenary.nvim" },
 })
 
+require("lazydev").setup({
+  library = {
+    -- See the configuration section for more details
+    -- Load luvit types when the `vim.uv` word is found
+    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+  },
+})
+
 -- servers with additional configuration, empty table if no config
 local servers = {
-  lua_ls = {
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most
-          -- likely LuaJIT in the case of Neovim)
-          version = "LuaJIT",
-          -- Tell the language server how to find Lua modules same way as Neovim
-          -- (see `:h lua-module-load`)
-          path = {
-            "lua/?.lua",
-            "lua/?/init.lua",
-          },
-        },
-        -- Make the server aware of Neovim runtime files
-        workspace = {
-          checkThirdParty = false,
-          library = {
-            vim.env.VIMRUNTIME,
-            vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
-          },
-        },
-
-        diagnostics = {
-          globals = { "vim" },
-        },
-      },
-    },
-  },
+  lua_ls = {},
 
   tinymist = {
     settings = {
