@@ -1,3 +1,12 @@
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function(event)
+    local name, kind = event.data.spec.name, event.data.kind
+    if name == "LuaSnip" and (kind == "install" or kind == "update") then
+      vim.system({ "make", "install_jsregexp" }, { cwd = event.data.path }) -- why doesn't this work?
+    end
+  end,
+})
+
 vim.pack.add({
   {
     src = "https://github.com/L3MON4D3/LuaSnip",

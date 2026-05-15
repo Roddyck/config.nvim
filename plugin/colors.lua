@@ -7,16 +7,18 @@ vim.pack.add({
 
 require("rose-pine").setup({
   variant = "main",
-  disable_background = true,
   dim_inactive_windows = false,
   extend_background_behind_borders = true,
   styles = {
-    italic = false,
+    bold = true,
+    italic = true,
+    transparency = true,
   },
   enable = {
     terminal = true,
     legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
     migrations = true, -- Handle deprecated options automatically
+    transparency = true,
   },
   groups = {
     border = "muted",

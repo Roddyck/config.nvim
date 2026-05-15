@@ -42,7 +42,7 @@ local servers = {
   tailwindcss = {},
 }
 
-require("fidget").setup()
+require("fidget").setup({})
 
 local blink = require("blink.cmp")
 local capabilities =
@@ -64,13 +64,22 @@ end
 vim.diagnostic.config({
   -- update_in_insert = true,
   virtual_text = true,
+  virtual_lines = false,
   float = {
-    border = "rounded",
     source = true,
     header = "",
     prefix = "",
   },
 })
+
+vim.keymap.set("n", "<leader>vl", function()
+  local config = vim.diagnostic.config() or {}
+  if config.virtual_text then
+    vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
+  else
+    vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+  end
+end)
 
 require("typescript-tools").setup {
   settings = {

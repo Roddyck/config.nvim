@@ -34,6 +34,10 @@
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
+    "fzf-lua": {
+      "rev": "97376e364f51f1b5ae3efaa3eb2e929430ca8419",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
     "gruvbox.nvim": {
       "rev": "334d5fd49fc8033f26408425366c66c6390c57bb",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
@@ -94,15 +98,6 @@
     "supermaven-nvim": {
       "rev": "07d20fce48a5629686aefb0a7cd4b25e33947d50",
       "src": "https://github.com/supermaven-inc/supermaven-nvim"
-    },
-    "telescope-fzf-native.nvim": {
-      "rev": "6fea601bd2b694c6f2ae08a6c6fab14930c60e2c",
-      "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
-    },
-    "telescope.nvim": {
-      "rev": "5255aa27c422de944791318024167ad5d40aad20",
-      "src": "https://github.com/nvim-telescope/telescope.nvim",
-      "version": "0.2.0 - 0.3.0"
     },
     "trouble.nvim": {
       "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
