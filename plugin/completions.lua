@@ -11,6 +11,9 @@ vim.pack.add({
   },
 
   { src = "https://github.com/folke/lazydev.nvim" },
+
+  { src = "https://github.com/onsails/lspkind.nvim" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
 })
 
 require("blink.cmp").setup({
@@ -35,10 +38,38 @@ require("blink.cmp").setup({
       },
     },
 
-    -- Show documentation when selecting a completion item
-    documentation = {
-      auto_show = true,
-      auto_show_delay_ms = 500,
+    menu = {
+      scrollbar = false,
+      draw = {
+        components = {
+          kind_icon = {
+            text = function(ctx)
+              local icon = ctx.kind_icon
+              if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                local dev_icon = require("nvim-web-devicons").get_icon(ctx.label)
+                if dev_icon then
+                  icon = dev_icon
+                end
+              else
+                icon = require("lspkind").symbol_map[ctx.kind] or ""
+              end
+
+              return icon .. ctx.icon_gap
+            end,
+
+            highlight = function(ctx)
+              local hl = ctx.kind_hl
+              if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                if dev_icon then
+                  hl = dev_hl
+                end
+              end
+              return hl
+            end,
+          },
+        },
+      },
     },
   },
 

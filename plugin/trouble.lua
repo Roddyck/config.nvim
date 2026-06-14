@@ -1,5 +1,7 @@
 vim.pack.add({ "https://github.com/folke/trouble.nvim" })
 
+require("trouble").setup()
+
 vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>")
 vim.keymap.set("n", "[t", "<cmd>Trouble diagnostics next skip_groups=true jump=true<cr>")
 vim.keymap.set("n", "]t", "<cmd>Trouble diagnostics prev skip_groups=true jump=true<cr>")

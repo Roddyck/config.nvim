@@ -5,12 +5,22 @@ return function()
       local query_split = vim.split(query, " -- ", { plain = true })
       local search_query, glob_patterns = query_split[1], query_split[2]
 
+      local shortcuts = {
+        l = "*.lua",
+        c = "*.c",
+        h = "*.h",
+        js = "*.js",
+        ts = "*.ts",
+        sv = "*.svelte",
+      }
+
       if not glob_patterns then
         return -- fallback to original command
       end
 
       local pathspecs = {}
-      for _, pattern in ipairs(vim.split(glob_patterns, " ")) do
+      for _, glob_pattern in ipairs(vim.split(glob_patterns, " ")) do
+        local pattern = shortcuts[glob_pattern] or glob_pattern
         table.insert(pathspecs, string.format("-g '%s'", pattern))
       end
 

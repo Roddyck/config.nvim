@@ -25,7 +25,7 @@ require("lazydev").setup({
   },
 })
 
--- servers with additional configuration, empty table if no config
+-- servers with additional configuration
 local servers = {
   lua_ls = {},
 
@@ -40,6 +40,7 @@ local servers = {
   clangd = {},
   gopls = {},
   tailwindcss = {},
+  pyright = {},
 }
 
 require("fidget").setup({})

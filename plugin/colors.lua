@@ -51,7 +51,7 @@ require("rose-pine").setup({
     h6 = "foam",
   },
 })
-vim.cmd.colorscheme "rose-pine"
+-- vim.cmd.colorscheme("rose-pine")
 
 vim.pack.add({ "https://github.com/ellisonleao/gruvbox.nvim" })
 require("gruvbox").setup({
@@ -77,3 +77,5 @@ require("gruvbox").setup({
   dim_inactive = false,
   transparent_mode = true,
 })
+
+vim.cmd.colorscheme("gruvbox")

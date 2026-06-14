@@ -1,5 +1,6 @@
 vim.pack.add({
   { src = "https://github.com/ibhagwan/fzf-lua" },
+  { src = "https://github.com/elanmed/fzf-lua-frecency.nvim" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
 })
 
@@ -19,7 +20,23 @@ fzf.setup({
   },
 })
 
-vim.keymap.set("n", "<leader>pf", fzf.files)
+local fzf_frecency = require("fzf-lua-frecency")
+fzf_frecency.setup({
+  "telescope",
+
+  fzf_colors = true,
+
+  fzf_opts = {
+    ["--no-scrollbar"] = true,
+  },
+})
+
+vim.keymap.set("n", "<leader>pf", function()
+  fzf_frecency.frecency({
+    cwd_only = true,
+    display_score = false,
+  })
+end)
 vim.keymap.set("n", "<leader>ef", function()
   fzf.files({ cwd = "~/personal/dev/env/.config/nvim" })
 end)
