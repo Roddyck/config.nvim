@@ -20,23 +20,24 @@ fzf.setup({
   },
 })
 
-local fzf_frecency = require("fzf-lua-frecency")
-fzf_frecency.setup({
-  "telescope",
-
-  fzf_colors = true,
-
-  fzf_opts = {
-    ["--no-scrollbar"] = true,
-  },
-})
-
-vim.keymap.set("n", "<leader>pf", function()
-  fzf_frecency.frecency({
-    cwd_only = true,
-    display_score = false,
-  })
-end)
+-- local fzf_frecency = require("fzf-lua-frecency")
+-- fzf_frecency.setup({
+--   "telescope",
+--
+--   fzf_colors = true,
+--
+--   fzf_opts = {
+--     ["--no-scrollbar"] = true,
+--   },
+-- })
+--
+-- vim.keymap.set("n", "<leader>pf", function()
+--   fzf_frecency.frecency({
+--     cwd_only = true,
+--     display_score = false,
+--   })
+-- end)
+vim.keymap.set("n", "<leader>pf", fzf.files)
 vim.keymap.set("n", "<leader>ef", function()
   fzf.files({ cwd = "~/personal/dev/env/.config/nvim" })
 end)
