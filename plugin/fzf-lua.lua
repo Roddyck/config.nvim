@@ -39,7 +39,7 @@ fzf.setup({
 -- end)
 vim.keymap.set("n", "<leader>pf", fzf.files)
 vim.keymap.set("n", "<leader>ef", function()
-  fzf.files({ cwd = "~/personal/dev/env/.config/nvim" })
+  fzf.files({ cwd = "~/personal/dev/.config/nvim" })
 end)
 vim.keymap.set("n", "<C-p>", fzf.git_files)
 vim.keymap.set("n", "<leader>ps", fzf.grep)

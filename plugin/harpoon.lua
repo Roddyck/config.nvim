@@ -21,7 +21,7 @@ vim.keymap.set("n", "<C-e>", function()
 end)
 
 for i = 1, 5 do
-  vim.keymap.set("n", string.format("<M-%d>", i), function()
+  vim.keymap.set("n", string.format("<leader>%d", i), function()
     harpoon:list():select(i)
   end)
 end
