@@ -17,7 +17,7 @@ require("rose-pine").setup({
   enable = {
     terminal = true,
     legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-    migrations = true, -- Handle deprecated options automatically
+    migrations = true,        -- Handle deprecated options automatically
     transparency = true,
   },
   groups = {
@@ -71,7 +71,7 @@ require("gruvbox").setup({
   invert_signs = false,
   invert_tabline = false,
   inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "", -- can be "hard", "soft" or empty string
+  contrast = "",  -- can be "hard", "soft" or empty string
   palette_overrides = {},
   overrides = {},
   dim_inactive = false,

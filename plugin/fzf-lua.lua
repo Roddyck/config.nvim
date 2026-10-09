@@ -9,7 +9,7 @@ fzf.setup({
   "telescope",
 
   fzf_colors = true,
-  ui_select = true,
+  ui_select = {},
 
   fzf_opts = {
     ["--no-scrollbar"] = true,
